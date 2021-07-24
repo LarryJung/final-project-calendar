@@ -8,6 +8,8 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/calendar-api" />
+            <option value="$PROJECT_DIR$/calendar-batch" />
             <option value="$PROJECT_DIR$/calendar-core" />
           </set>
         </option>
