@@ -3,21 +3,33 @@ package com.larry.fc.finalproject.core.domain.entity;
 import com.larry.fc.finalproject.core.domain.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Builder(access = AccessLevel.PRIVATE)
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "schedules")
 public class Schedule {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime startAt;
     private LocalDateTime endAt;
     private String title;
     private String description;
+
+    @JoinColumn(name = "writer_id")
+    @ManyToOne
     private User writer;
+
+    @Enumerated(EnumType.STRING)
     private ScheduleType scheduleType;
+
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public static Schedule event(String title,
                                  String description, LocalDateTime startAt,

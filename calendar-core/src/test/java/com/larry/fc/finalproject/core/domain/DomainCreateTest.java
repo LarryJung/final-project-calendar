@@ -1,6 +1,7 @@
 package com.larry.fc.finalproject.core.domain;
 
 import com.larry.fc.finalproject.core.domain.entity.Schedule;
+import com.larry.fc.finalproject.core.domain.entity.User;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -15,8 +16,7 @@ public class DomainCreateTest {
                                   "email@email",
                                   "password",
                                   LocalDateTime.now()
-                                               .toLocalDate(),
-                                  LocalDateTime.now());
+                                               .toLocalDate());
 
 
     @Test
