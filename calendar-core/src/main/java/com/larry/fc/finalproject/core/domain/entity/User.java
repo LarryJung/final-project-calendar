@@ -1,14 +1,13 @@
 package com.larry.fc.finalproject.core.domain.entity;
 
+import com.larry.fc.finalproject.core.util.Encryptor;
 import lombok.Builder;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-@Getter
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
@@ -16,7 +15,7 @@ public class User extends BaseEntity {
 
     private String name;
     private String email;
-    private String password;
+    private String password; // hashed
     private LocalDate birthday;
 
     @Builder
@@ -25,5 +24,21 @@ public class User extends BaseEntity {
         this.email = email;
         this.password = password;
         this.birthday = birthday;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public boolean isMatched(Encryptor encryptor, String pw) {
+        return encryptor.isMatch(pw, this.password);
     }
 }

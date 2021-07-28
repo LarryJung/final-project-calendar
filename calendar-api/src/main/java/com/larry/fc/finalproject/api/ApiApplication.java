@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@EnableJpaAuditing
-@EntityScan("com.larry.fc.finalproject.core")
-@EnableJpaRepositories("com.larry.fc.finalproject.core")
 @RestController
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.larry.fc.finalproject")
 public class ApiApplication {
 
     private final SimpleEntityRepository repository;
