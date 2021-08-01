@@ -6,6 +6,7 @@ import com.larry.fc.finalproject.core.domain.ScheduleType;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 @NoArgsConstructor
@@ -35,11 +36,19 @@ public class Engagement extends BaseEntity {
         return schedule.toEvent();
     }
 
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
     public User getAttendee() {
         return attendee;
     }
 
     public RequestStatus getStatus() {
         return status;
+    }
+
+    public boolean isOverlapped(LocalDate date) {
+        return this.schedule.isOverlapped(date);
     }
 }

@@ -1,7 +1,7 @@
 package com.larry.fc.finalproject.api.service;
 
 import com.larry.fc.finalproject.api.dto.AuthUser;
-import com.larry.fc.finalproject.api.dto.EventCreateReq;
+import com.larry.fc.finalproject.api.dto.CreateEventReq;
 import com.larry.fc.finalproject.core.domain.RequestStatus;
 import com.larry.fc.finalproject.core.domain.entity.Engagement;
 import com.larry.fc.finalproject.core.domain.entity.Schedule;
@@ -26,7 +26,7 @@ public class EventService {
     private final EmailService emailService;
 
     @Transactional
-    public void create(EventCreateReq req, AuthUser authUser) {
+    public void create(CreateEventReq req, AuthUser authUser) {
         // attendees 의 스케쥴 시간과 겹치지 않는지?
         final List<Engagement> engagementList =
                 engagementRepository.findAllByAttendeeIdInAndSchedule_EndAtAfter(req.getAttendeeIds(),

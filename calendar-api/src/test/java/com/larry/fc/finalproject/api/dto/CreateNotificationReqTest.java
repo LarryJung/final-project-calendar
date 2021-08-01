@@ -12,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 /**
  * @author Larry
  */
-public class NotificationCreateReqTest {
+public class CreateNotificationReqTest {
     @Test
     @DisplayName("반복없음")
     void test1() {
         LocalDateTime time = LocalDateTime.of(2021, 7, 1, 0, 0, 0);
-        NotificationCreateReq req = new NotificationCreateReq("titie", time, null);
+        CreateNotificationReq req = new CreateNotificationReq("titie", time, null);
         assertEquals(List.of(time), req.getRepeatTimes());
     }
 
@@ -25,10 +25,10 @@ public class NotificationCreateReqTest {
     @DisplayName("일반복")
     void test2() {
         LocalDateTime time = LocalDateTime.of(2021, 7, 1, 0, 0, 0);
-        NotificationCreateReq req = new NotificationCreateReq("titie",
+        CreateNotificationReq req = new CreateNotificationReq("titie",
                 time,
-                new NotificationCreateReq.RepeatInfo(
-                        new NotificationCreateReq.Interval(
+                new CreateNotificationReq.RepeatInfo(
+                        new CreateNotificationReq.Interval(
                                 1,
                                 TimeUnit.DAY),
                         3
@@ -40,10 +40,10 @@ public class NotificationCreateReqTest {
     @DisplayName("주반복")
     void test3() {
         LocalDateTime time = LocalDateTime.of(2021, 7, 1, 0, 0, 0);
-        NotificationCreateReq req = new NotificationCreateReq("titie",
+        CreateNotificationReq req = new CreateNotificationReq("titie",
                 time,
-                new NotificationCreateReq.RepeatInfo(
-                        new NotificationCreateReq.Interval(
+                new CreateNotificationReq.RepeatInfo(
+                        new CreateNotificationReq.Interval(
                                 2,
                                 TimeUnit.WEEK),
                         3
@@ -56,10 +56,10 @@ public class NotificationCreateReqTest {
     @DisplayName("월반복")
     void test4() {
         LocalDateTime time = LocalDateTime.of(2021, 7, 1, 0, 0, 0);
-        NotificationCreateReq req = new NotificationCreateReq("titie",
+        CreateNotificationReq req = new CreateNotificationReq("titie",
                 time,
-                new NotificationCreateReq.RepeatInfo(
-                        new NotificationCreateReq.Interval(
+                new CreateNotificationReq.RepeatInfo(
+                        new CreateNotificationReq.Interval(
                                 1,
                                 TimeUnit.MONTH),
                         3
@@ -72,10 +72,10 @@ public class NotificationCreateReqTest {
     @DisplayName("연반복")
     void test5() {
         LocalDateTime time = LocalDateTime.of(2021, 7, 1, 0, 0, 0);
-        NotificationCreateReq req = new NotificationCreateReq("titie",
+        CreateNotificationReq req = new CreateNotificationReq("titie",
                 time,
-                new NotificationCreateReq.RepeatInfo(
-                        new NotificationCreateReq.Interval(
+                new CreateNotificationReq.RepeatInfo(
+                        new CreateNotificationReq.Interval(
                                 1,
                                 TimeUnit.YEAR),
                         3

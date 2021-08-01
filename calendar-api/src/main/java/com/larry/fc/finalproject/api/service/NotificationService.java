@@ -1,7 +1,7 @@
 package com.larry.fc.finalproject.api.service;
 
 import com.larry.fc.finalproject.api.dto.AuthUser;
-import com.larry.fc.finalproject.api.dto.NotificationCreateReq;
+import com.larry.fc.finalproject.api.dto.CreateNotificationReq;
 import com.larry.fc.finalproject.core.domain.entity.Schedule;
 import com.larry.fc.finalproject.core.domain.entity.User;
 import com.larry.fc.finalproject.core.domain.entity.repository.ScheduleRepository;
@@ -21,7 +21,7 @@ public class NotificationService {
     private final UserService userService;
 
     @Transactional
-    public void create(NotificationCreateReq req, AuthUser authUser) {
+    public void create(CreateNotificationReq req, AuthUser authUser) {
         final User writer = userService.getOrThrowById(authUser.getId());
         req.getRepeatTimes()
                 .forEach(notifyAt ->

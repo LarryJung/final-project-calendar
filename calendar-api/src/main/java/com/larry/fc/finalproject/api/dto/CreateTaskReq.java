@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
  * @author Larry
  */
 @Data
-public class TaskCreateReq {
+public class CreateTaskReq {
     private final String title;
     private final String description;
     private final LocalDateTime taskAt;

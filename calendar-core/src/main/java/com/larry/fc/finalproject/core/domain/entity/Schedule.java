@@ -1,9 +1,11 @@
 package com.larry.fc.finalproject.core.domain.entity;
 
 import com.larry.fc.finalproject.core.domain.*;
+import com.larry.fc.finalproject.core.util.Period;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Builder(access = AccessLevel.PRIVATE)
@@ -69,5 +71,9 @@ public class Schedule extends BaseEntity {
 
     public Notification toNotification() {
         return new Notification(this);
+    }
+
+    public boolean isOverlapped(LocalDate date) {
+        return Period.of(this.getStartAt(), this.getEndAt()).isOverlapped(date);
     }
 }

@@ -1,18 +1,17 @@
 package com.larry.fc.finalproject.api.controller.api;
 
-import com.larry.fc.finalproject.api.dto.AuthUser;
-import com.larry.fc.finalproject.api.dto.EventCreateReq;
-import com.larry.fc.finalproject.api.dto.NotificationCreateReq;
-import com.larry.fc.finalproject.api.dto.TaskCreateReq;
+import com.larry.fc.finalproject.api.dto.*;
 import com.larry.fc.finalproject.api.service.EventService;
 import com.larry.fc.finalproject.api.service.NotificationService;
+import com.larry.fc.finalproject.api.service.ScheduleQueryService;
 import com.larry.fc.finalproject.api.service.TaskService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * @author Larry
@@ -22,28 +21,37 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ScheduleController {
 
+    private final ScheduleQueryService scheduleQueryService;
     private final TaskService taskService;
     private final EventService eventService;
     private final NotificationService notificationService;
 
     @PostMapping("/tasks")
-    public ResponseEntity<Void> createTask(@RequestBody TaskCreateReq taskCreateReq,
+    public ResponseEntity<Void> createTask(@RequestBody CreateTaskReq createTaskReq,
                                            AuthUser authUser) {
-        taskService.create(taskCreateReq, authUser);
+        taskService.create(createTaskReq, authUser);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/events")
-    public ResponseEntity<Void> createTask(@RequestBody EventCreateReq eventCreateReq,
+    public ResponseEntity<Void> createTask(@RequestBody CreateEventReq createEventReq,
                                            AuthUser authUser) {
-        eventService.create(eventCreateReq, authUser);
+        eventService.create(createEventReq, authUser);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/notifications")
     public ResponseEntity<Void> createTask(
-            @RequestBody NotificationCreateReq notificationCreateReq, AuthUser authUser) {
-        notificationService.create(notificationCreateReq, authUser);
+            @RequestBody CreateNotificationReq createNotificationReq, AuthUser authUser) {
+        notificationService.create(createNotificationReq, authUser);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/day")
+    public List<ForListScheduleDto> getSchedulesByDay(
+            AuthUser authUser,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
+    ) {
+        return scheduleQueryService.getSchedulesByDay(date == null ? LocalDate.now() : date, authUser);
     }
 }
