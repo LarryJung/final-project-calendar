@@ -28,6 +28,10 @@ public class Period {
                 endAt == null ? startAt.atStartOfDay() : endAt.atStartOfDay());
     }
 
+    public static Period of(LocalDate date) {
+        return new Period(date.atStartOfDay(), date.atStartOfDay());
+    }
+
     public static Period of(LocalDateTime startAt) {
         return new Period(startAt, startAt);
     }
