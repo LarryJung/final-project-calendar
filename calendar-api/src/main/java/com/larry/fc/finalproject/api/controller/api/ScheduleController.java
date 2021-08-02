@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 
 /**
@@ -53,5 +54,21 @@ public class ScheduleController {
             @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date
     ) {
         return scheduleQueryService.getSchedulesByDay(date == null ? LocalDate.now() : date, authUser);
+    }
+
+    @GetMapping("/week")
+    public List<ForListScheduleDto> getSchedulesByWeek(
+            AuthUser authUser,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startOfWeek
+    ) {
+        return scheduleQueryService.getSchedulesByWeek(startOfWeek == null ? LocalDate.now() : startOfWeek, authUser);
+    }
+
+    @GetMapping("/month")
+    public List<ForListScheduleDto> getSchedulesByMonth(
+            AuthUser authUser,
+            @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM") String yearMonth
+    ) {
+        return scheduleQueryService.getSchedulesByMonth(yearMonth == null ? YearMonth.now() : YearMonth.parse(yearMonth), authUser);
     }
 }
