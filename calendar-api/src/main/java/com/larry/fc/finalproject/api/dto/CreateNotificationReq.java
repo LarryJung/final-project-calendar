@@ -3,6 +3,8 @@ package com.larry.fc.finalproject.api.dto;
 import com.larry.fc.finalproject.core.domain.type.TimeUnit;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -15,7 +17,9 @@ import static java.util.stream.Collectors.toList;
  */
 @Data
 public class CreateNotificationReq {
+    @NotBlank
     private final String title;
+    @NotNull
     private final LocalDateTime notifyAt;
     private final RepeatInfo repeatInfo;
 
