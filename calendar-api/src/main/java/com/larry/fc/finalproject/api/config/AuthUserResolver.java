@@ -1,6 +1,8 @@
 package com.larry.fc.finalproject.api.config;
 
 import com.larry.fc.finalproject.api.dto.AuthUser;
+import com.larry.fc.finalproject.core.exception.CalendarException;
+import com.larry.fc.finalproject.core.exception.ErrorCode;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -27,7 +29,7 @@ public class AuthUserResolver implements HandlerMethodArgumentResolver {
         if (userId != null) {
             return AuthUser.of(userId);
         } else {
-            throw new RuntimeException("bad request. no session");
+            throw new CalendarException(ErrorCode.BAD_REQUEST);
         }
     }
 }

@@ -3,6 +3,8 @@ package com.larry.fc.finalproject.core.service;
 import com.larry.fc.finalproject.core.domain.entity.User;
 import com.larry.fc.finalproject.core.domain.entity.repository.UserRepository;
 import com.larry.fc.finalproject.core.dto.UserCreateReq;
+import com.larry.fc.finalproject.core.exception.CalendarException;
+import com.larry.fc.finalproject.core.exception.ErrorCode;
 import com.larry.fc.finalproject.core.util.Encryptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ public class UserService {
     public User create(UserCreateReq req) {
         userRepository.findByEmail(req.getEmail())
                 .ifPresent(u -> {
-                    throw new RuntimeException("cannot find user");
+                    throw new CalendarException(ErrorCode.USER_NOT_FOUND);
                 });
         return userRepository.save(User.builder()
                 .name(req.getName())
@@ -41,6 +43,6 @@ public class UserService {
     }
 
     public User getOrThrowById(Long id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("no user."));
+        return userRepository.findById(id).orElseThrow(() -> new CalendarException(ErrorCode.USER_NOT_FOUND));
     }
 }

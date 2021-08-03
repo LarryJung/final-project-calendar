@@ -1,6 +1,8 @@
 package com.larry.fc.finalproject.api.dto;
 
 import com.larry.fc.finalproject.core.domain.type.TimeUnit;
+import com.larry.fc.finalproject.core.exception.CalendarException;
+import com.larry.fc.finalproject.core.exception.ErrorCode;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
@@ -40,7 +42,7 @@ public class CreateNotificationReq {
                                 case YEAR:
                                     return notifyAt.plusYears(increment);
                                 default:
-                                    throw new RuntimeException("bad request. not matched time unit");
+                                    throw new CalendarException(ErrorCode.BAD_REQUEST);
                             }
                         }
                 )

@@ -1,6 +1,8 @@
 package com.larry.fc.finalproject.api.dto;
 
 import com.larry.fc.finalproject.core.domain.entity.Schedule;
+import com.larry.fc.finalproject.core.exception.CalendarException;
+import com.larry.fc.finalproject.core.exception.ErrorCode;
 
 /**
  * @author Larry
@@ -34,7 +36,7 @@ public abstract class DtoConverter {
                         .writerId(schedule.getWriter().getId())
                         .build();
             default:
-                throw new RuntimeException("bad request. not matched schedule type.");
+                throw new CalendarException(ErrorCode.BAD_REQUEST);
         }
     }
 }
