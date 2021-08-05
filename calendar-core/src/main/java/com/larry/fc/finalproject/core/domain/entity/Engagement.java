@@ -3,6 +3,7 @@ package com.larry.fc.finalproject.core.domain.entity;
 import com.larry.fc.finalproject.core.domain.Event;
 import com.larry.fc.finalproject.core.domain.RequestStatus;
 import com.larry.fc.finalproject.core.domain.ScheduleType;
+import com.larry.fc.finalproject.core.domain.type.RequestReplyType;
 import com.larry.fc.finalproject.core.util.Period;
 import lombok.NoArgsConstructor;
 
@@ -56,5 +57,22 @@ public class Engagement extends BaseEntity {
     public boolean isOverlapped(Period period) {
         return this.schedule.isOverlapped(period);
     }
+
+    public boolean isRequested() {
+        return this.status == RequestStatus.REQUESTED;
+    }
+
+    public Engagement reply(RequestReplyType type) {
+        switch (type) {
+            case ACCEPT:
+                this.status = RequestStatus.ACCEPTED;
+                break;
+            case REJECT:
+                this.status = RequestStatus.REJECTED;
+                break;
+        }
+        return this;
+    }
+
 
 }

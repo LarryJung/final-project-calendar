@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Spring boot eamil teplate with Thymeleaf</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <!-- use the font -->
+    <style>
+        table {
+            width: 100%;
+            border: 1px solid black;
+        }
+
+        .title {
+            background-color: aquamarine;
+            padding: 10px;
+        }
+
+        td {
+            padding-left: 10px;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+<body>
+<p class="title">다음 일정에 초대되었습니다.</p>
+<h3 th:text="${subject}"></h3>
+<table>
+    <tr>
+        <td width="20%">시간</td>
+        <td width="80%"><p th:text="${period}"></p></td>
+    </tr>
+    <tr>
+        <td>캘린더</td>
+        <td><p th:text="${calendar}"></p></td>
+    </tr>
+    <tr>
+        <td>참석자</td>
+        <td>
+            <ul>
+                <li th:each="attendee: ${attendees}">
+                    <p th:text="${attendee}"></p>
+                </li>
+            </ul>
+        </td>
+    </tr>
+    <tr>
+        <td>참석하시겠습니까?</td>
+        <td>
+            <span><a th:href="${acceptUrl}">예</a></span>
+            -
+            <span><a th:href="${rejectUrl}">아니요</a></span>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

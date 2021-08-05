@@ -1,10 +1,10 @@
 package com.larry.fc.finalproject.api.service;
 
-import com.larry.fc.finalproject.core.domain.entity.Engagement;
+import com.larry.fc.finalproject.api.dto.EngagementEmailStuff;
 
 /**
  * @author Larry
  */
 public interface EmailService {
-    void sendEngagement(Engagement e);
+    void sendEngagement(EngagementEmailStuff stuff);
 }

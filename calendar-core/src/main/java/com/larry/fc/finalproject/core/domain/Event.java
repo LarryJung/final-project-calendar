@@ -2,6 +2,7 @@ package com.larry.fc.finalproject.core.domain;
 
 import com.larry.fc.finalproject.core.domain.entity.Schedule;
 import com.larry.fc.finalproject.core.domain.entity.User;
+import com.larry.fc.finalproject.core.util.Period;
 
 import java.time.LocalDateTime;
 
@@ -29,5 +30,13 @@ public class Event {
 
     public boolean isOverlapped(LocalDateTime startAt, LocalDateTime endAt) {
         return this.getStartAt().isBefore(endAt) && startAt.isBefore(this.getEndAt());
+    }
+
+    public String getTitle() {
+        return schedule.getTitle();
+    }
+
+    public Period getPeriod() {
+        return Period.of(schedule.getStartAt(), schedule.getEndAt());
     }
 }

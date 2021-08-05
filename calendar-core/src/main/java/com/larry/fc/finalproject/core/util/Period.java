@@ -48,4 +48,11 @@ public class Period {
                 LocalDateTime.of(date, LocalTime.of(23, 59, 59, 999999999)));
     }
 
+    @Override
+    public String toString() {
+        return "Period{" +
+                "startAt=" + startAt +
+                ", endAt=" + endAt +
+                '}';
+    }
 }
