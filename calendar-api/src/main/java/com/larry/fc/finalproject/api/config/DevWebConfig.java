@@ -11,12 +11,12 @@ import java.util.List;
 /**
  * @author Larry
  */
-@Profile("!dev")
+@Profile("dev")
 @Configuration
-public class WebConfig implements WebMvcConfigurer {
+public class DevWebConfig implements WebMvcConfigurer {
 
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> resolvers) {
-        resolvers.add(new AuthUserResolver());
+        resolvers.add(new FakeAuthUserResolver());
     }
 }
