@@ -1,0 +1,21 @@
+spring:
+  batch:
+    job:
+      names: ${job.name:NONE}
+    jdbc:
+      initialize-schema: never
+  datasource:
+    url: jdbc:mysql://localhost:3306/calendar_db?useSSL=false&serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: ''
+  main:
+    web-application-type: none
+
+logging:
+  level:
+    org:
+      springframework:
+        jdbc: TRACE
+        transaction: DEBUG
+        batch: DEBUG
