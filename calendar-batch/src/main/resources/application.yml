@@ -5,7 +5,7 @@ spring:
     jdbc:
       initialize-schema: never
   datasource:
-    url: jdbc:mysql://localhost:3306/calendar_db?useSSL=false&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://localhost:3306/calendar_db?useSSL=false&serverTimezone=Asia/Seoul&useCursorFetch=true
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: ''
