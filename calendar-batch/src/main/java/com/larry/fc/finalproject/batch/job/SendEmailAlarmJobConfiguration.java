@@ -69,7 +69,6 @@ public class SendEmailAlarmJobConfiguration {
     @Bean
     public JdbcCursorItemReader<SendMailBatchReq> sendEngagementAlarmReader() {
         return new JdbcCursorItemReaderBuilder<SendMailBatchReq>()
-                .fetchSize(CHUNK_SIZE)
                 .dataSource(dataSource)
                 .rowMapper(new BeanPropertyRowMapper<>(SendMailBatchReq.class))
                 .sql("select s.id, s.start_at, s.title, u.email as user_email\n" +
@@ -88,7 +87,6 @@ public class SendEmailAlarmJobConfiguration {
     @Bean
     public JdbcCursorItemReader<SendMailBatchReq> sendScheduleAlarmReader() {
         return new JdbcCursorItemReaderBuilder<SendMailBatchReq>()
-                .fetchSize(CHUNK_SIZE)
                 .dataSource(dataSource)
                 .rowMapper(new BeanPropertyRowMapper<>(SendMailBatchReq.class))
                 .sql("select s.id, s.start_at, s.title, u.email as user_email\n" +
