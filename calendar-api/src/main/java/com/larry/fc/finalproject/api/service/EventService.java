@@ -40,7 +40,7 @@ public class EventService {
         if (engagementList
                 .stream()
                 .anyMatch(e -> e.getEvent().isOverlapped(req.getStartAt(), req.getEndAt())
-                        && e.getStatus() == RequestStatus.ACCEPTED)) {
+                        && e.getRequestStatus() == RequestStatus.ACCEPTED)) {
             throw new CalendarException(ErrorCode.EVENT_CREATE_OVERLAPPED_PERIOD);
         }
         final Schedule eventSchedule = Schedule.event(req.getTitle(), req.getDescription(), req.getStartAt(), req.getEndAt(), userService.getOrThrowById(authUser.getId()));

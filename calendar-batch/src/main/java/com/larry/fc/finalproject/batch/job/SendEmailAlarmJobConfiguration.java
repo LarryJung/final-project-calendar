@@ -15,6 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import javax.sql.DataSource;
+import java.util.stream.Collectors;
 
 /**
  * @author Larry
@@ -75,11 +76,9 @@ public class SendEmailAlarmJobConfiguration {
                         "from schedules s\n" +
                         "         left join engagements e on s.id = e.schedule_id\n" +
                         "         left join users u on u.id = e.attendee_id\n" +
-                        "where s.start_at >= date_format(date_add(now(), interval 10 minute)" +
-                        ", '%Y-%m-%d %H:%i')\n" +
-                        "  and s.start_at < date_format(date_add(now(), interval 11 minute)," +
-                        " '%Y-%m-%d %H:%i')\n" +
-                        "  and e.status = 'ACCEPTED'")
+                        "where s.start_at >= now() + interval 10 minute\n" +
+                        "  and s.start_at < now() + interval 11 minute\n" +
+                        "  and e.request_status = 'ACCEPTED'")
                 .name("jdbcCursorItemReader")
                 .build();
     }
@@ -91,17 +90,18 @@ public class SendEmailAlarmJobConfiguration {
                 .rowMapper(new BeanPropertyRowMapper<>(SendMailBatchReq.class))
                 .sql("select s.id, s.start_at, s.title, u.email as user_email\n" +
                         "from schedules s\n" +
-                        "    left join users u on u.id = s.writer_id\n" +
-                        "where s.start_at >= date_format(date_add(now(), interval 10 minute)" +
-                        ", '%Y-%m-%d %H:%i')\n" +
-                        "  and s.start_at < date_format(date_add(now(), interval 11 minute)," +
-                        " '%Y-%m-%d %H:%i')")
+                        "         left join users u on u.id = s.writer_id\n" +
+                        "where s.start_at >= now() + interval 10 minute\n" +
+                        "  and s.start_at < now() + interval 11 minute")
                 .name("jdbcCursorItemReader")
                 .build();
     }
 
     @Bean
     public ItemWriter<SendMailBatchReq> sendEmailAlarmWriter() {
-        return list -> list.forEach(System.out::println);
+        return list -> log.info("write items.\n" +
+                list.stream()
+                        .map(s -> s.toString())
+                        .collect(Collectors.joining("\n")));
     }
 }
