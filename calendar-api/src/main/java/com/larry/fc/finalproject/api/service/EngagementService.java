@@ -27,6 +27,6 @@ public class EngagementService {
                 .filter(e -> e.getAttendee().getId().equals(authUser.getId()))
                 .map(e -> e.reply(type))
                 .orElseThrow(() -> new CalendarException(ErrorCode.BAD_REQUEST))
-                .getStatus();
+                .getRequestStatus();
     }
 }

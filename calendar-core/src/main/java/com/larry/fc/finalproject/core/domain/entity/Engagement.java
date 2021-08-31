@@ -25,12 +25,12 @@ public class Engagement extends BaseEntity {
     private User attendee;
 
     @Enumerated(EnumType.STRING)
-    private RequestStatus status;
+    private RequestStatus requestStatus;
 
     public Engagement(Schedule eventSchedule, User attendee) {
         assert eventSchedule.getScheduleType() == ScheduleType.EVENT;
         this.schedule = eventSchedule;
-        this.status = RequestStatus.REQUESTED;
+        this.requestStatus = RequestStatus.REQUESTED;
         this.attendee = attendee;
     }
 
@@ -46,8 +46,8 @@ public class Engagement extends BaseEntity {
         return attendee;
     }
 
-    public RequestStatus getStatus() {
-        return status;
+    public RequestStatus getRequestStatus() {
+        return requestStatus;
     }
 
     public boolean isOverlapped(LocalDate date) {
@@ -59,16 +59,16 @@ public class Engagement extends BaseEntity {
     }
 
     public boolean isRequested() {
-        return this.status == RequestStatus.REQUESTED;
+        return this.requestStatus == RequestStatus.REQUESTED;
     }
 
     public Engagement reply(RequestReplyType type) {
         switch (type) {
             case ACCEPT:
-                this.status = RequestStatus.ACCEPTED;
+                this.requestStatus = RequestStatus.ACCEPTED;
                 break;
             case REJECT:
-                this.status = RequestStatus.REJECTED;
+                this.requestStatus = RequestStatus.REJECTED;
                 break;
         }
         return this;
