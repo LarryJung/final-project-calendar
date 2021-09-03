@@ -2,6 +2,7 @@ package com.larry.fc.finalproject.api.service;
 
 import com.larry.fc.finalproject.api.controller.api.BatchController;
 import com.larry.fc.finalproject.api.dto.EngagementEmailStuff;
+import com.larry.fc.finalproject.core.domain.entity.Share;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -50,5 +51,10 @@ public class RealEmailService implements EmailService {
                     req.getTitle()));
         };
         emailSender.send(preparator);
+    }
+
+    @Override
+    public void sendShareRequestMail(String email, String email1, Share.Direction direction) {
+        System.out.println("send share mail");
     }
 }

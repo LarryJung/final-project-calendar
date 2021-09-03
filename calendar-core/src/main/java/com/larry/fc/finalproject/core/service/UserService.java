@@ -42,7 +42,9 @@ public class UserService {
                 .map(u -> u.isMatched(bcryptEncryptor, password) ? u : null);
     }
 
+    @Transactional
     public User getOrThrowById(Long id) {
         return userRepository.findById(id).orElseThrow(() -> new CalendarException(ErrorCode.USER_NOT_FOUND));
     }
+
 }

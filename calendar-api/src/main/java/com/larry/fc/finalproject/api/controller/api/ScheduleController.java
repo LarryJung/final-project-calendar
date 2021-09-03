@@ -3,6 +3,7 @@ package com.larry.fc.finalproject.api.controller.api;
 import com.larry.fc.finalproject.api.dto.*;
 import com.larry.fc.finalproject.api.service.*;
 import com.larry.fc.finalproject.core.domain.RequestStatus;
+import com.larry.fc.finalproject.core.domain.type.RequestReplyType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ public class ScheduleController {
     private final EventService eventService;
     private final NotificationService notificationService;
     private final EngagementService engagementService;
+    private final ShareService shareService;
 
     @PostMapping("/tasks")
     public ResponseEntity<Void> createTask(@Valid @RequestBody CreateTaskReq createTaskReq,
@@ -74,9 +76,28 @@ public class ScheduleController {
 
     @PutMapping("/events/engagements/{engagementId}")
     public RequestStatus updateEngagement(
-            @Valid @RequestBody ReplyEngagementReq replyEngagementReq,
+            @Valid @RequestBody ReplyReq replyReq,
             @PathVariable Long engagementId,
             AuthUser authUser) {
-        return engagementService.update(authUser, engagementId, replyEngagementReq.getType());
+        return engagementService.update(authUser, engagementId, replyReq.getType());
+    }
+
+    @PostMapping("/shares")
+    public void shareSchedule(
+            AuthUser authUser,
+            @Valid @RequestBody CreateShareReq req
+    ) {
+        shareService.createShare(authUser.getId(),
+                                 req.getToUserId(),
+                                 req.getDirection());
+    }
+
+    @PutMapping("/shares/{shareId}")
+    public void replyToShareRequest(
+            @PathVariable Long shareId,
+            @Valid @RequestBody ReplyReq replyReq,
+            AuthUser authUser
+    ) {
+        shareService.replyToShareRequest(shareId, authUser.getId(), replyReq.getType());
     }
 }

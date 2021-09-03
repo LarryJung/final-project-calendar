@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
-public class ReplyEngagementReq {
+public class ReplyReq {
     @NotNull
     private RequestReplyType type;
 }
