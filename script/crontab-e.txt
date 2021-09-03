@@ -1,2 +1,2 @@
 * * * * * /Users/larry.charry/Documents/Projects/final-project-calendar/script/cron_test.sh >> /Users/larry.charry/Documents/Projects/final-project-calendar/log/cron_test.sh.log 2>&1
-* * * * * /Users/larry.charry/Documents/Projects/final-project-calendar/script/batch_cron:wq!.sh >> /Users/larry.charry/Documents/Projects/final-project-calendar/log/batch_cron.sh.log 2>&1
+* * * * * /Users/larry.charry/Documents/Projects/final-project-calendar/script/batch_cron.sh >> /Users/larry.charry/Documents/Projects/final-project-calendar/log/batch_cron.sh.log 2>&1
