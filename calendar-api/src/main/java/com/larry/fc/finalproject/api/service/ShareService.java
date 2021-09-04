@@ -34,7 +34,6 @@ public class ShareService {
                                          .fromUserId(fromUserId)
                                          .toUserId(toUserId)
                                          .direction(direction)
-                                         .createdAt(LocalDateTime.now())
                                          .requestStatus(RequestStatus.REQUESTED)
                                          .build());
     }
