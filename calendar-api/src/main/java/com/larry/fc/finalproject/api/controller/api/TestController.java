@@ -20,7 +20,7 @@ public class TestController {
     public void sendMail() {
         final MimeMessagePreparator preparator = message -> {
             MimeMessageHelper helper = new MimeMessageHelper(message);
-//            helper.setTo("blabla@mail.mail");
+            helper.setTo("ehtjd33@mail.mail");
             helper.setSubject("제목입니당~~");
             helper.setText("테슷흐 메일");
         };
